@@ -12,7 +12,6 @@ import java.util.List;
 
 public class CallLogAdapter extends RecyclerView.Adapter {
     public static int CALL_LOG=1;
-    public static int CONTACTS=2;
     List<CallLog> callLogs;
     int CallType;
 
@@ -37,12 +36,7 @@ public class CallLogAdapter extends RecyclerView.Adapter {
             String time = callLogs.get(position).getTime();
 
             ((CallViewHolder) holder).setLogDetails(name, number, date, time);
-        } else {
-            String name = callLogs.get(position).getName();
-            String number = callLogs.get(position).getContact();
-
-            ((CallViewHolder) holder).setContactDetails(name, number);
-}
+        }
     }
 
     @Override
@@ -71,13 +65,6 @@ public class CallLogAdapter extends RecyclerView.Adapter {
             Number.setText(number);
             Date.setText(date);
             Time.setText(time);
-        }
-
-        public void setContactDetails(String name,String number){
-            Name.setText(name);
-            Number.setText(number);
-            Date.setVisibility(View.GONE);
-            Time.setVisibility(View.GONE);
         }
     }
 }

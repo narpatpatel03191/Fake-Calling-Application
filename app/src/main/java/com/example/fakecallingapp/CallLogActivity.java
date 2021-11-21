@@ -22,6 +22,7 @@ public class CallLogActivity extends AppCompatActivity {
 
         for (int i=0;i<10;i++){
             callLogList.add(new CallLog("Himanshu Pandey","+91 6378791396","12:40 AM","11 Nov 2021"));
+            callLogList.add(new CallLog("Narpat Patel","+91 8949473540","12:10 AM","12 Nov 2021"));
         }
         CallLogAdapter adapter=new CallLogAdapter(callLogList,CallLogAdapter.CALL_LOG);
         LinearLayoutManager layoutManager=new LinearLayoutManager(getApplicationContext());
