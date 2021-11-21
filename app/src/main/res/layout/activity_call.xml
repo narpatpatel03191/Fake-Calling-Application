@@ -18,7 +18,7 @@
         android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold"
-        android:text="Mr Krishna Ji From Goloka" />
+        tools:text="Mr Krishna Ji From Goloka" />
 
     <TextView
         android:id="@+id/caller_number"
@@ -30,19 +30,38 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:text="+91 6378791396" />
+        tools:text="+91 6378791396" />
 
-    <TextView
+    <androidx.cardview.widget.CardView
         android:id="@+id/caller_sim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/caller_number"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
+        app:cardCornerRadius="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="Jio"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+    <Chronometer
+        android:visibility="gone"
+        android:id="@+id/chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/caller_sim"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="Jio" />
+        android:textSize="24sp" />
 
     <ImageView
         android:id="@+id/call_accept"

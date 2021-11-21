@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="15dp"
+    app:cardElevation="30dp">
+
+    <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp">
@@ -14,24 +20,26 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         tools:text="Himanshu Pandey" />
+
     <TextView
         android:id="@+id/call_log_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/call_log_name"
-        tools:text="+91 6378791396"
         android:layout_marginLeft="20dp"
-        android:textColor="@color/black"
-        android:textSize="15sp"/>
+        android:textColor="@color/grey"
+        android:textSize="15sp"
+        tools:text="+91 6378791396" />
+
     <TextView
         android:id="@+id/call_log_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/call_log_number"
-        tools:text="11 Nov 2021"
         android:layout_marginLeft="20dp"
-        android:textColor="@color/black"
-        android:textSize="15sp"/>
+        android:textColor="@color/grey"
+        android:textSize="15sp"
+        tools:text="11 Nov 2021" />
     <TextView
         android:id="@+id/call_log_time"
         android:layout_alignParentRight="true"
@@ -40,7 +48,8 @@
         android:layout_below="@id/call_log_number"
         tools:text="12:30 AM"
         android:layout_marginRight="20dp"
-        android:textColor="@color/black"
+        android:textColor="@color/grey"
         android:textSize="15sp"/>
 
 </RelativeLayout>
+</androidx.cardview.widget.CardView>

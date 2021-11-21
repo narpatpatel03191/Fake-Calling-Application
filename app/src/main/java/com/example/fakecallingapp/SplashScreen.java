@@ -46,7 +46,7 @@ public class SplashScreen extends AppCompatActivity {
 
         objectAnimator.start();
 
-        animatText("Fake Calling...");
+        animatText("Fake Caller");
 
 
         Animation animation1 = AnimationUtils.loadAnimation(this, R.anim.bottom_wave);
