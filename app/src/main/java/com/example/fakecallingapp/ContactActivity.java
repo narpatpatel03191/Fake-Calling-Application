@@ -50,8 +50,8 @@ public class ContactActivity extends AppCompatActivity {
         if(cursor.getCount()>0)
         {
             while (cursor.moveToNext()){
-                String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-                String name =cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                @SuppressLint("Range") String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+                @SuppressLint("Range") String name =cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
                 Uri phoneUri=ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
                 String selection=ContactsContract.CommonDataKinds.Phone.CONTACT_ID+" =?";
@@ -59,7 +59,7 @@ public class ContactActivity extends AppCompatActivity {
                         phoneUri,null,selection,new String[]{id},null);
                 if(PhoneCursor.moveToNext())
                 {
-                 String number=PhoneCursor.getString(PhoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                 @SuppressLint("Range") String number=PhoneCursor.getString(PhoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                  Contact contact=new Contact(name,number);
                     ContactList.add(contact);
                     PhoneCursor.close();
