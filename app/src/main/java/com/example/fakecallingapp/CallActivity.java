@@ -5,10 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class CallActivity extends AppCompatActivity {
 
@@ -27,6 +33,7 @@ public class CallActivity extends AppCompatActivity {
         ImageView callReject=findViewById(R.id.call_reject);
         MediaPlayer mediaPlayer=MediaPlayer.create(getApplicationContext(),R.raw.ring);
         mediaPlayer.start();
+        saveToDatabase(intent.getStringExtra("name"),intent.getStringExtra("number"));
 
 
         callAccept.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +66,22 @@ public class CallActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void saveToDatabase(String name,String number) {
+        CallLog callLog;
+        Time t = new Time(Time.getCurrentTimezone());
+        t.setToNow();
+        String date1 = t.format("%Y/%m/%d");
+
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm aa", Locale.ENGLISH);
+        String time = dateFormat.format(date);
+//        String horafecha = time+ " - " + date1;
+//        Toast.makeText(getApplicationContext(),horafecha,Toast.LENGTH_LONG).show();
+          callLog=new CallLog(name,number,time,date1);
+          CallLogDatabase callLogDatabase=new CallLogDatabase(getApplicationContext());
+          callLogDatabase.addToLogs(callLog);
     }
 
 }

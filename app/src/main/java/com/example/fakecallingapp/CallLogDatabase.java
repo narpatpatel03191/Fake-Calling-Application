@@ -59,12 +59,11 @@ public class CallLogDatabase extends SQLiteOpenHelper {
 
         List<CallLog> list=new ArrayList<>();
 
-        if(cursor.moveToFirst()){
-            do{
-                list.add(new CallLog(cursor.getString(2),cursor.getString(3),
-                        cursor.getString(5),cursor.getString(4)));
-            }while(cursor.moveToNext());
-        }
+            while (cursor.moveToNext()){
+                list.add(new CallLog(cursor.getString(1),cursor.getString(2),
+                        cursor.getString(4),cursor.getString(3)));
+            }
+
         cursor.close();
         db.close();
         return list;

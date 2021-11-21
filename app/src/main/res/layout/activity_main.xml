@@ -76,6 +76,7 @@
             android:padding="10dp"/>
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
+        android:id="@+id/contacts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/sky_blue"

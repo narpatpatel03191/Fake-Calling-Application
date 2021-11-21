@@ -1,5 +1,7 @@
 package com.example.fakecallingapp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +14,11 @@ import java.util.List;
 public class ContactAdapter extends RecyclerView.Adapter {
     public static int CONTACTS=1;
     List<Contact> contacts;
-    int CallType;
+    Context context;
 
-    public ContactAdapter(List<Contact> contacts,int CallType) {
+    public ContactAdapter(List<Contact> contacts, Context context) {
         this.contacts = contacts;
-        this.CallType=CallType;
+        this.context=context;
     }
 
     @NonNull
@@ -28,13 +30,12 @@ public class ContactAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if(CallType==CONTACTS)
-        {
+
             String name = contacts.get(position).getNamee();
             String number = contacts.get(position).getContactt();
 
             ((ContactViewHolder) holder).setContactDetails(name, number);
-        }
+
 
     }
 
@@ -58,6 +59,16 @@ public class ContactAdapter extends RecyclerView.Adapter {
         public void setContactDetails(String name,String number){
             Name.setText(name);
             Number.setText(number);
+            itemView.findViewById(R.id.select_contact_layout).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(context,CallActivity.class);
+                    intent.putExtra("name",name);
+                    intent.putExtra("number",number);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

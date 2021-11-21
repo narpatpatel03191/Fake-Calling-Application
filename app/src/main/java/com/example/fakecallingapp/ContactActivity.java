@@ -8,6 +8,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,26 +24,31 @@ import java.util.List;
 
 public class ContactActivity extends AppCompatActivity {
     List<Contact> ContactList=new ArrayList<>();
-    RecyclerView contactRecyclerView = findViewById(R.id.contact_list);
+    RecyclerView contactRecyclerView;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_contact);
-        checkPermission();
+        contactRecyclerView=(RecyclerView) findViewById(R.id.contact_list);
+        progressBar=findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.VISIBLE);
+        getContactList();
+//        checkPermission();
 
     }
 
-    private void checkPermission() {
-        if(ContextCompat.checkSelfPermission(ContactActivity.this, Manifest.permission.READ_CONTACTS)!= PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(ContactActivity.this,new String[]{
-                    Manifest.permission.READ_CONTACTS},100);
-
-        }
-        else
-        {
-            getContactList();
-        }
-    }
+//    private void checkPermission() {
+//        if(ContextCompat.checkSelfPermission(ContactActivity.this, Manifest.permission.READ_CONTACTS)!= PackageManager.PERMISSION_GRANTED){
+//            ActivityCompat.requestPermissions(ContactActivity.this,new String[]{
+//                    Manifest.permission.READ_CONTACTS},100);
+//
+//        }
+//        else
+//        {
+//            getContactList();
+//        }
+//    }
 
     private void getContactList() {
         Uri uri= ContactsContract.Contacts.CONTENT_URI;
@@ -66,23 +73,24 @@ public class ContactActivity extends AppCompatActivity {
                 }
             }
             cursor.close();
+            progressBar.setVisibility(View.GONE);
         }
-        ContactAdapter adapterr=new ContactAdapter(ContactList,ContactAdapter.CONTACTS);
+        ContactAdapter adapterr=new ContactAdapter(ContactList,getApplicationContext());
         LinearLayoutManager layoutManager=new LinearLayoutManager(getApplicationContext());
         contactRecyclerView.setLayoutManager(layoutManager);
         contactRecyclerView.setAdapter(adapterr);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode==100 && grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
-            getContactList();
-        }
-        else
-        {
-            Toast.makeText(ContactActivity.this,"Permission Denied",Toast.LENGTH_LONG).show();
-            checkPermission();
-        }
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        if(requestCode==100 && grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+//            getContactList();
+//        }
+//        else
+//        {
+//            Toast.makeText(ContactActivity.this,"Permission Denied",Toast.LENGTH_LONG).show();
+//            checkPermission();
+//        }
+//    }
 }

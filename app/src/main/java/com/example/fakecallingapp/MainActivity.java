@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-        findViewById(R.id.contact_button).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.contacts).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),ContactActivity.class));
