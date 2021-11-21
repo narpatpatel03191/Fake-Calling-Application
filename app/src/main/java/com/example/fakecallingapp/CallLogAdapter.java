@@ -11,10 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class CallLogAdapter extends RecyclerView.Adapter {
+    public static int CALL_LOG=1;
+    public static int CONTACTS=2;
     List<CallLog> callLogs;
+    int CallType;
 
-    public CallLogAdapter(List<CallLog> callLogs) {
+    public CallLogAdapter(List<CallLog> callLogs,int CallType) {
         this.callLogs = callLogs;
+        this.CallType=CallType;
     }
 
     @NonNull
@@ -26,14 +30,19 @@ public class CallLogAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        String name=callLogs.get(position).getName();
-        String number=callLogs.get(position).getContact();
-        String date=callLogs.get(position).getDate();
-        String time=callLogs.get(position).getTime();
+        if (CallType == CALL_LOG) {
+            String name = callLogs.get(position).getName();
+            String number = callLogs.get(position).getContact();
+            String date = callLogs.get(position).getDate();
+            String time = callLogs.get(position).getTime();
 
-        ((CallViewHolder)holder).setDetails(name,number,date,time);
+            ((CallViewHolder) holder).setLogDetails(name, number, date, time);
+        } else {
+            String name = callLogs.get(position).getName();
+            String number = callLogs.get(position).getContact();
 
-        
+            ((CallViewHolder) holder).setContactDetails(name, number);
+}
     }
 
     @Override
@@ -57,11 +66,18 @@ public class CallLogAdapter extends RecyclerView.Adapter {
             Time=(TextView) view.findViewById(R.id.call_log_time);
         }
 
-        public void setDetails(String name,String number,String date,String time){
+        public void setLogDetails(String name,String number,String date,String time){
             Name.setText(name);
             Number.setText(number);
             Date.setText(date);
             Time.setText(time);
+        }
+
+        public void setContactDetails(String name,String number){
+            Name.setText(name);
+            Number.setText(number);
+            Date.setVisibility(View.GONE);
+            Time.setVisibility(View.GONE);
         }
     }
 }

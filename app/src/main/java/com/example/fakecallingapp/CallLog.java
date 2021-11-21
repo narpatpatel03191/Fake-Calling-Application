@@ -15,6 +15,11 @@ public class CallLog {
         this.date = date;
     }
 
+    public CallLog(String name, String contact) {
+        this.name = name;
+        this.contact = contact;
+    }
+
     public String getName() {
         return name;
     }

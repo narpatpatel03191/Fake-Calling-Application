@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/background"
     android:layout_height="wrap_content"
     android:padding="10dp">
 
@@ -12,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp"
         tools:text="Himanshu Pandey" />
     <TextView
@@ -22,7 +21,7 @@
         android:layout_below="@id/call_log_name"
         tools:text="+91 6378791396"
         android:layout_marginLeft="20dp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="15sp"/>
     <TextView
         android:id="@+id/call_log_date"
@@ -31,7 +30,7 @@
         android:layout_below="@id/call_log_number"
         tools:text="11 Nov 2021"
         android:layout_marginLeft="20dp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="15sp"/>
     <TextView
         android:id="@+id/call_log_time"
@@ -41,7 +40,7 @@
         android:layout_below="@id/call_log_number"
         tools:text="12:30 AM"
         android:layout_marginRight="20dp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="15sp"/>
 
 </RelativeLayout>
