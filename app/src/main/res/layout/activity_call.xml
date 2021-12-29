@@ -18,7 +18,7 @@
         android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold"
-        tools:text="Mr Krishna Ji From Goloka" />
+        tools:text="Ms Kirti Purswani" />
 
     <TextView
         android:id="@+id/caller_number"
