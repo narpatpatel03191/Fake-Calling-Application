@@ -34,21 +34,9 @@ public class ContactActivity extends AppCompatActivity {
         progressBar=findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.VISIBLE);
         getContactList();
-//        checkPermission();
 
     }
 
-//    private void checkPermission() {
-//        if(ContextCompat.checkSelfPermission(ContactActivity.this, Manifest.permission.READ_CONTACTS)!= PackageManager.PERMISSION_GRANTED){
-//            ActivityCompat.requestPermissions(ContactActivity.this,new String[]{
-//                    Manifest.permission.READ_CONTACTS},100);
-//
-//        }
-//        else
-//        {
-//            getContactList();
-//        }
-//    }
 
     private void getContactList() {
         Uri uri= ContactsContract.Contacts.CONTENT_URI;
@@ -81,16 +69,4 @@ public class ContactActivity extends AppCompatActivity {
         contactRecyclerView.setAdapter(adapterr);
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        if(requestCode==100 && grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
-//            getContactList();
-//        }
-//        else
-//        {
-//            Toast.makeText(ContactActivity.this,"Permission Denied",Toast.LENGTH_LONG).show();
-//            checkPermission();
-//        }
-//    }
 }

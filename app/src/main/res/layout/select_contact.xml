@@ -5,19 +5,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".CallLogActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/contact_header"
         android:layout_width="match_parent"
+        app:cardBackgroundColor="@color/background"
         android:layout_height="wrap_content"
         android:elevation="60dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Contact List"
+            android:text="Contacts"
             android:textAllCaps="true"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"

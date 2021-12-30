@@ -6,6 +6,8 @@ import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -17,41 +19,19 @@ public class SplashScreen extends AppCompatActivity {
     android.os.Handler handler = new Handler();
     ;
     ImageView iVTop, iVBottom, iVLogo;
-    TextView textView;
+    TextView splashText;
     CharSequence charSequence;
     int index;
     long delay = 90;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+       requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splashscreen);
-        iVTop = findViewById(R.id.iv_top);
-        iVBottom = findViewById(R.id.iv_bottom);
-        iVLogo = findViewById(R.id.logo);
-        textView = findViewById(R.id.text_view);
-
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.top_wave);
-
-        iVTop.startAnimation(animation);
-
-        ObjectAnimator objectAnimator = ObjectAnimator.ofPropertyValuesHolder(iVLogo,
-                PropertyValuesHolder.ofFloat("scaleX", 1.2f),
-                PropertyValuesHolder.ofFloat("scaleY", 1.2f));
-
-        objectAnimator.setDuration(1500);
-
-        objectAnimator.setRepeatCount(ValueAnimator.INFINITE);
-        objectAnimator.setRepeatMode(ValueAnimator.REVERSE);
-
-        objectAnimator.start();
-
-        animatText("Fake Caller");
-
-
-        Animation animation1 = AnimationUtils.loadAnimation(this, R.anim.bottom_wave);
-
-        iVBottom.setAnimation(animation1);
+        setContentView(R.layout.splash_new);
+        splashText=(TextView)findViewById(R.id.splash_text);
+        animateText("Fake Caller");
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -68,7 +48,7 @@ public class SplashScreen extends AppCompatActivity {
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            textView.setText(charSequence.subSequence(0, index++));
+            splashText.setText(charSequence.subSequence(0, index++));
 
             if (index <= charSequence.length()) {
                 handler.postDelayed(runnable, delay);
@@ -76,10 +56,10 @@ public class SplashScreen extends AppCompatActivity {
         }
     };
 
-    public void animatText(CharSequence cs) {
+    public void animateText(CharSequence cs) {
         charSequence = cs;
         index = 0;
-        textView.setText("");
+        splashText.setText("");
         handler.removeCallbacks(runnable);
         handler.postDelayed(runnable, delay);
     }

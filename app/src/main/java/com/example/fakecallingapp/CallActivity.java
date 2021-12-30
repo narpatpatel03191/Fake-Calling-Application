@@ -2,15 +2,18 @@ package com.example.fakecallingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.text.format.Time;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,8 +21,14 @@ import java.util.Locale;
 
 public class CallActivity extends AppCompatActivity {
 
+    MediaPlayer mediaPlayerRingtone;
+    MediaPlayer mediaPlayerTalk;
+    Vibrator vibrator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call);
 
@@ -31,9 +40,12 @@ public class CallActivity extends AppCompatActivity {
         ImageView callAccept=findViewById(R.id.call_accept);
         ImageView callRejectIncoming=findViewById(R.id.call_reject_incoming);
         ImageView callReject=findViewById(R.id.call_reject);
-        MediaPlayer mediaPlayer=MediaPlayer.create(getApplicationContext(),R.raw.ring);
-        mediaPlayer.start();
+        mediaPlayerRingtone =MediaPlayer.create(getApplicationContext(),R.raw.ring);
+        mediaPlayerRingtone.setLooping(true);
+        mediaPlayerRingtone.start();
         saveToDatabase(intent.getStringExtra("name"),intent.getStringExtra("number"));
+
+        enableVibration();
 
 
         callAccept.setOnClickListener(new View.OnClickListener() {
@@ -46,8 +58,15 @@ public class CallActivity extends AppCompatActivity {
                 Chronometer chronometer=findViewById(R.id.chronometer);
                 chronometer.setVisibility(View.VISIBLE);
                 chronometer.start();
-                mediaPlayer.stop();
-                mediaPlayer.release();
+                mediaPlayerRingtone.stop();
+                mediaPlayerRingtone.release();
+                vibrator.cancel();
+                findViewById(R.id.call_elements_upper).setVisibility(View.VISIBLE);
+                findViewById(R.id.call_elements_lower).setVisibility(View.VISIBLE);
+
+                mediaPlayerTalk=MediaPlayer.create(getApplicationContext(),R.raw.call_talk);
+                mediaPlayerTalk.setLooping(true);
+                mediaPlayerTalk.start();
             }
         });
 
@@ -55,8 +74,9 @@ public class CallActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                mediaPlayer.stop();
-                mediaPlayer.release();
+                mediaPlayerRingtone.stop();
+                mediaPlayerRingtone.release();
+                vibrator.cancel();
             }
         });
 
@@ -64,8 +84,22 @@ public class CallActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                mediaPlayerTalk.stop();
+                mediaPlayerTalk.release();
             }
         });
+    }
+    private void enableVibration() {
+        long[] VIBRATE_PATTERN = {1000, 1000};
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // API 26 and above
+            vibrator.vibrate(VibrationEffect.createWaveform(VIBRATE_PATTERN, 0));
+        } else {
+            // Below API 26
+            vibrator.vibrate(VIBRATE_PATTERN, 0);
+        }
     }
 
     private void saveToDatabase(String name,String number) {
@@ -84,4 +118,19 @@ public class CallActivity extends AppCompatActivity {
           callLogDatabase.addToLogs(callLog);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if(mediaPlayerRingtone.isPlaying()) {
+            mediaPlayerRingtone.stop();
+            mediaPlayerRingtone.release();
+        }
+        if(mediaPlayerTalk.isPlaying()){
+            mediaPlayerTalk.stop();
+            mediaPlayerTalk.release();
+        }
+        if(vibrator.hasVibrator())
+             vibrator.cancel();
+    }
 }

@@ -3,29 +3,34 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
+    android:background="@color/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/background"
-        android:layout_margin="5dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="Fake Caller"
-            android:textColor="@color/white"
-            android:padding="5dp" />
-    </androidx.cardview.widget.CardView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+        <ImageView
+            android:id="@+id/main_act_logo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/splash_call"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Fake Caller"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/white"
         android:layout_marginTop="50dp">
 
         <EditText
@@ -37,6 +42,8 @@
             android:layout_marginBottom="20dp"
             android:ems="10"
             android:hint="Enter Name"
+            android:textColorHint="@color/grey"
+            android:textColor="@color/white"
             android:inputType="textPersonName"
             tools:ignore="TouchTargetSizeCheck" />
 
@@ -48,6 +55,8 @@
             android:layout_marginRight="10dp"
             android:ems="10"
             android:hint="Enter Number"
+            android:textColor="@color/white"
+            android:textColorHint="@color/grey"
             android:inputType="phone"
             android:minHeight="48dp" />
 
@@ -79,7 +88,7 @@
         android:id="@+id/contacts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/sky_blue"
+        app:cardBackgroundColor="#D3E813B3"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         app:cardCornerRadius="15dp"
@@ -102,7 +111,7 @@
         android:layout_height="wrap_content"
         android:text="Call Logs"
         android:layout_gravity="center"
-        android:textColor="#1E90FF"
+        android:textColor="#D3E813B3"
         android:textSize="20sp"
         android:textStyle="bold"/>
 
